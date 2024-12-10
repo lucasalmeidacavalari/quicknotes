@@ -14,7 +14,13 @@ func noteView(w http.ResponseWriter, r *http.Request) {
 }
 
 func noteCreate(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		// Rejeitar a requisicao
+		w.WriteHeader(405)
+		return
+	}
 	fmt.Fprint(w, "Criando uma nota...")
+
 }
 
 func main() {
