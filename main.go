@@ -6,7 +6,11 @@ import (
 )
 
 func noteList(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Listagem de Notas")
+	w.Header().Set("Content-Type", "application/json")
+
+	w.Header()["Date"] = nil //Suprimir o cabecario
+
+	fmt.Fprint(w, `{"id": 1}`)
 }
 
 func noteView(w http.ResponseWriter, r *http.Request) {
