@@ -15,8 +15,12 @@ func noteView(w http.ResponseWriter, r *http.Request) {
 
 func noteCreate(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
+
+		w.Header().Set("Allow", "POST")
+
 		// Rejeitar a requisicao
-		w.WriteHeader(405)
+		w.WriteHeader(405) // So pode ser chamado uma vez por requisicao
+		// Importante dar return para nao seguir a linha de codigo
 		return
 	}
 	fmt.Fprint(w, "Criando uma nota...")
