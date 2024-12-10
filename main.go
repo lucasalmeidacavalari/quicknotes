@@ -5,22 +5,25 @@ import (
 	"net/http"
 )
 
-type MyHandler struct{}
-
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Rota Default")
+func noteList(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Listagem de Notas")
 }
 
-func olaHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Ola Handler")
+func noteView(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Exibindo uma nota...")
+}
+
+func noteCreate(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Criando uma nota...")
 }
 
 func main() {
 	fmt.Println("Servidor rodando na porta 5000")
 	mux := http.NewServeMux()
-	//rota coringa /
-	mux.HandleFunc("/", homeHandler)
-	mux.HandleFunc("/ola", olaHandler)
+
+	mux.HandleFunc("/", noteList)
+	mux.HandleFunc("/note/view", noteView)
+	mux.HandleFunc("/note/create", noteCreate)
 
 	http.ListenAndServe(":5000", mux)
 }
